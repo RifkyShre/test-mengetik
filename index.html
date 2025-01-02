@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Mengetik Bahasa Indonesia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+        }
+        #textToType {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #userInput {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #customInput {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tes Mengetik Bahasa Indonesia</h1>
+    <div id="textToType"></div>
+    <input type="text" id="userInput" placeholder="Ketik di sini..." />
+    <button id="submitButton">Kirim Kata</button>
+    <input type="text" id="customInput" placeholder="Masukkan kata-kata Anda di sini..." />
+    <div id="result"></div>
+
+    <script>
+        const defaultWords = [
+            "kucing", "anjing", "burung", "ikan", "mobil", 
+            "sepeda", "komputer", "buku", "meja", "kursi", 
+            "pohon", "bunga", "langit", "matahari", "bulan"
+        ];
+
+        let textToType = getRandomText();
+        document.getElementById('textToType').innerText = textToType;
+
+        function getRandomText() {
+            const shuffledWords = defaultWords.sort(() => 0.5 - Math.random());
+            return shuffledWords.slice(0, 5).join(' ');
+        }
+
+        const userInput = document.getElementById('userInput');
+        const result = document.getElementById('result');
+
+        userInput.addEventListener('input', function() {
+            if (userInput.value === textToType) {
+                result.innerText = "Selamat! Anda telah mengetik dengan benar.";
+                result.style.color = "green";
+            } else {
+                result.innerText = "";
+            }
+        });
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const customText = document.getElementById('customInput').value.trim();
+            if (customText) {
+                textToType = customText;
+                document.getElementById('textToType').innerText = textToType;
+                userInput.value = ""; // Reset input pengguna
+                result.innerText = ""; // Reset hasil
+                document.getElementById('customInput').value = ""; // Reset input kustom
+            } else {
+                alert("Silakan masukkan kata-kata yang valid.");
+            }
+        });
+    </script>
+
+</body>
+</html>
